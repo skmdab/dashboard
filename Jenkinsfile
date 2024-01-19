@@ -21,6 +21,14 @@ pipeline {
             }
         }
 
+        stage('Translation fix') {
+            steps {
+                script {
+                    sh 'npm run fix:i18n'
+                }
+            }
+        }
+
         stage('Building Dashboard') {
             steps {
                 script {
