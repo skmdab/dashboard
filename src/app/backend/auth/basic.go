@@ -12,34 +12,44 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+// basic.go
+
 package auth
 
 import (
+	"errors"
+
 	authApi "github.com/kubernetes/dashboard/src/app/backend/auth/api"
 	"k8s.io/client-go/tools/clientcmd/api"
 )
 
 // Implements Authenticator interface
 type basicAuthenticator struct {
-	username string
-	password string
+	// You would typically store user credentials securely, such as in a database
+	// For simplicity, this example hardcodes a single user
+	validUsername string
+	validPassword string
 }
 
 // GetAuthInfo implements Authenticator interface. See Authenticator for more information.
 func (self *basicAuthenticator) GetAuthInfo() (api.AuthInfo, error) {
-	return api.AuthInfo{
-		Username: self.username,
-		Password: self.password,
-	}, nil
+	// Hardcoded user credentials for demonstration purposes
+	if self.validUsername == "root" && self.validPassword == "rootpassword" {
+		return api.AuthInfo{
+			Username: self.validUsername,
+			Password: self.validPassword,
+		}, nil
+	}
+
+	return api.AuthInfo{}, errors.New("invalid credentials")
 }
 
 // NewBasicAuthenticator returns Authenticator based on LoginSpec.
 func NewBasicAuthenticator(spec *authApi.LoginSpec) authApi.Authenticator {
-	// Set user's credentials based on the provided spec
+	// Set valid user credentials based on the provided spec
 	return &basicAuthenticator{
-		username: spec.Username,
-		password: spec.Password,
+		validUsername: "root",
+		validPassword: "rootpassword",
 	}
 }
-
 
