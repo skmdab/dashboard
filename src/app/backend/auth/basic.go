@@ -35,9 +35,11 @@ func (self *basicAuthenticator) GetAuthInfo() (api.AuthInfo, error) {
 
 // NewBasicAuthenticator returns Authenticator based on LoginSpec.
 func NewBasicAuthenticator(spec *authApi.LoginSpec) authApi.Authenticator {
+	// Set user's credentials based on the provided spec
 	return &basicAuthenticator{
 		username: spec.Username,
 		password: spec.Password,
 	}
 }
+
 
