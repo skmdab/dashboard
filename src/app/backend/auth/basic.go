@@ -12,6 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+// basic.go
+
 package auth
 
 import (
@@ -33,10 +35,15 @@ func (self *basicAuthenticator) GetAuthInfo() (api.AuthInfo, error) {
 	}, nil
 }
 
-// NewBasicAuthenticator returns Authenticator based on LoginSpec.
-func NewBasicAuthenticator(spec *authApi.LoginSpec) authApi.Authenticator {
+// NewBasicAuthenticator returns Authenticator based on hardcoded root user credentials.
+func NewBasicAuthenticator() authApi.Authenticator {
+	// Set root user's credentials
+	rootUsername := "root"
+	rootPassword := "rootpassword"
+
 	return &basicAuthenticator{
-		username: spec.Username,
-		password: spec.Password,
+		username: rootUsername,
+		password: rootPassword,
 	}
 }
+
