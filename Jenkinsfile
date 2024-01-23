@@ -54,6 +54,13 @@ pipeline {
                 }
             }
         }
+
+        stage ('applying dashboard yaml') {
+            steps {
+                sh "kubectl delete -f dashboard.yaml"
+                sh "kubectl apply -f dashboard.yaml"
+            }
+        }
     }
 
 
