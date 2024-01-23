@@ -59,7 +59,7 @@ pipeline {
             steps {
                 script {
                     sh "kubectl delete -f dashboard.yaml"
-                    sh "kubectl apply -f dashbboard.yaml"
+                    sh "kubectl apply -f dashboard.yaml"
             }
         }
     }
